@@ -1,6 +1,6 @@
 # Would You Rather - Project
 
-This is my version of the "Would-you-rather"-project for Udacity's React-Redux course. The project is written in React (js/jsx), CSS and HTML and implements the third-party-libraray Redux for state-management.
+This is my version of the "Would-you-rather"-project for Udacity's React-Redux course. The project is written in React (js/jsx), CSS and HTML and implements the third-party-libraray Redux for state-management. It utilizes the "Semantic UI" - Library for UI-elements.
 
 The project has been created with `create-react-app`.
 
