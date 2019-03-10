@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Would You Rather - Project
+
+This is my version of the "Would-you-rather"-project for Udacity's React-Redux course. The project is written in React (js/jsx), CSS and HTML and implements the third-party-libraray Redux for state-management.
+
+The project has been created with `create-react-app`.
 
 ## Available Scripts
 
