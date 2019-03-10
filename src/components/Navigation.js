@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react';
 
 export default class WYRNavbar extends React.Component {
   state = { 
-    activeItem: this.props.active 
+    activeItem: this.props.active
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
