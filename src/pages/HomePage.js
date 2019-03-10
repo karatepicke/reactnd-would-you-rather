@@ -1,10 +1,11 @@
 import React from 'react';
+import WYRNavbar from '../components/Navigation';
 
 class HomePage extends React.Component {
   render() {
     return(
       <div className="home">
-        APP
+        <WYRNavbar active="home" />
       </div> 
     )
   }
