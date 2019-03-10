@@ -4,6 +4,14 @@ This is my version of the "Would-you-rather"-project for Udacity's React-Redux c
 
 The project has been created with `create-react-app`.
 
+## Setting up and starting
+
+To get started working on the project right away:
+
+* clone/pull this repository to your local machine
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
+
 ## Available Scripts
 
 In the project directory, you can run:
