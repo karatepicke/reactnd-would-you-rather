@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Divider, Grid, Header, Icon, Segment } from 'semantic-ui-react';
 import SignInUpForm from './SignInUpForm';
 
@@ -22,7 +23,9 @@ const SignInUpPrompt = () => (
             <Icon name='add user' />
             Create Account
           </Header>
-          <Button primary>Create</Button>
+          <Link to="/register">
+            <Button primary>Create</Button>
+          </Link>
         </Grid.Column>
       </Grid.Row>
     </Grid>
