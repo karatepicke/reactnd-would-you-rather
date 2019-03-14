@@ -1,9 +1,16 @@
 import { SET_AUTHED_USER } from '../actions/authedUser';
 
-export default function authedUser(state = null, action) {
+const initialState = {
+  user: undefined
+}
+
+export default function authedUser(state = initialState, action) {
   switch (action.type) {
     case SET_AUTHED_USER:
-      return action.id
+      return {
+        ...state,
+        user: action.user
+      }
     default:
       return state
   }
