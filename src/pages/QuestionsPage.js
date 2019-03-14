@@ -1,15 +1,32 @@
 import React from 'react';
 import WYRNavbar from '../components/Navigation';
+import { connect } from 'react-redux';
 
 class QuestionsPage extends React.Component {
+  componentWillMount() {
+    if (!this.props.user) {
+      this.props.history.push('/login')
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (!props.user) {
+      props.history.push('/login')
+    }
+  }
+
   render() {
-    return(
+    if (!this.props.user) {
+      return null
+    }
+    return (
       <div className="login">
         <WYRNavbar active="questions" />
-        QUESTIONS
-      </div> 
+        <p>{this.props.user.name}</p>
+      </div>
     )
   }
 }
 
-export default QuestionsPage;
+const mapStateToProps = ({ authedUser }) => ({ user: authedUser.user })
+export default connect(mapStateToProps)(QuestionsPage);
