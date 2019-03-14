@@ -1,6 +1,8 @@
 import React from 'react';
+import ImpersonationBadge from '../components/impersonationBadge';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
+import LoginLogout from './LoginLogout';
 
 export default class WYRNavbar extends React.Component {
   render() {
@@ -30,13 +32,14 @@ export default class WYRNavbar extends React.Component {
             activeClassName="active"
           >Leaderboard</NavLink>
           <Menu.Menu position='right'>
-            <NavLink
+            <ImpersonationBadge />
+            <LoginLogout />
+            {/* <NavLink
               to="/login"
               className="item"
-              onClick={this.handleItemClick}
               name='login'
               activeClassName="active"
-            >Login</NavLink>
+            >Login</NavLink> */}
           </Menu.Menu>
         </Menu>
       </div>
