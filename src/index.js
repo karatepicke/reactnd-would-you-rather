@@ -12,7 +12,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 // Pages
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import QuestionsPage from './pages/QuestionsPage';
 import AnswersPage from './pages/AnswersPage';
 import LeaderboardPage from './pages/LeaderboardPage';
@@ -29,7 +28,6 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
         <Route path="/questions" component={QuestionsPage} />
         <Route path="/answers" component={AnswersPage} />
         <Route path="/leaderboard" component={LeaderboardPage} />
