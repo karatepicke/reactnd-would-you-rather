@@ -46,7 +46,7 @@ class SignInUpForm extends React.Component {
         if (user) {
           this.props.dispatch(setAuthedUser(user))
         } else {
-          console.log('No valid user')
+          console.log('Not a valid user')
         }
       }
     )
