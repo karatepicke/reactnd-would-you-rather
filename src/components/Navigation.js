@@ -23,7 +23,7 @@ export default class WYRNavbar extends React.Component {
             className="item"
             name='answers'
             activeClassName="active"
-          >Answers </NavLink>
+          >Answers</NavLink>
           <NavLink to="/leaderboard"
             className="item"
             name='leaderboard'
