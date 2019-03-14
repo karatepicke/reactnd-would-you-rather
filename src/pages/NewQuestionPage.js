@@ -2,7 +2,7 @@ import React from 'react';
 import WYRNavbar from '../components/Navigation';
 import { connect } from 'react-redux';
 
-class QuestionsPage extends React.Component {
+class NewQuestionPage extends React.Component {
   componentWillMount() {
     if (!this.props.user) {
       this.props.history.push('/login')
@@ -29,4 +29,4 @@ class QuestionsPage extends React.Component {
 }
 
 const mapStateToProps = ({ authedUser }) => ({ user: authedUser.user })
-export default connect(mapStateToProps)(QuestionsPage);
+export default connect(mapStateToProps)(NewQuestionPage);

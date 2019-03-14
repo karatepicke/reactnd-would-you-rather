@@ -16,11 +16,11 @@ export default class WYRNavbar extends React.Component {
             name='home'
             activeClassName="active"
           >Home</NavLink>
-          <NavLink to="/questions"
+          <NavLink to="/add"
             className="item"
             name='questions'
             activeClassName="active"
-          >Questions</NavLink>
+          >Add Question</NavLink>
           <NavLink to="/answers"
             className="item"
             name='answers'
