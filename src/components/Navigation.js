@@ -1,5 +1,5 @@
 import React from 'react';
-import ImpersonationBadge from '../components/impersonationBadge';
+import ImpersonationBadge from '../components/ImpersonationBadge';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import LoginLogout from './LoginLogout';
@@ -34,12 +34,6 @@ export default class WYRNavbar extends React.Component {
           <Menu.Menu position='right'>
             <ImpersonationBadge />
             <LoginLogout />
-            {/* <NavLink
-              to="/login"
-              className="item"
-              name='login'
-              activeClassName="active"
-            >Login</NavLink> */}
           </Menu.Menu>
         </Menu>
       </div>
