@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { _getUsers } from '../../data/_DATA';
 import { connect } from 'react-redux';
-import { setuser } from '../../store/actions/user';
+import { setUser } from '../../store/actions/user';
 
 class SignInUpForm extends React.Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class SignInUpForm extends React.Component {
       (users) => {
         const user = users[this.state.userId]
         if (user) {
-          this.props.dispatch(setuser(user))
+          this.props.dispatch(setUser(user))
         } else {
           console.log('Not a valid user')
         }

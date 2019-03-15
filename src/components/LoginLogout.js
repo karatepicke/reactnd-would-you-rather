@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { destroyuser } from '../store/actions/user';
+import { destroyUser } from '../store/actions/user';
 
 class LoginLogout extends React.Component {
   render() {
@@ -28,7 +28,7 @@ class LoginLogout extends React.Component {
   handleLogoutClick(event) {
     event.preventDefault();
 
-    this.props.dispatch(destroyuser())
+    this.props.dispatch(destroyUser())
   }
 }
 
