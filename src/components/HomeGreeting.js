@@ -1,13 +1,15 @@
 import React from 'react';
-import { Segment, Icon, Header, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import QuestionsPanel from './QuestionsPanel';
 
+// UI
+import { Segment, Icon, Header, Button } from 'semantic-ui-react';
+
 class HomeGreeting extends React.Component {
   render() {
     if (!this.props.user) {
-      return(
+      return (
         <Segment className="t-center">
           <h1>Would you rather...?</h1>
           <p className="subheading">A React Nanodegree Project by Dominik Pickenäcker</p>

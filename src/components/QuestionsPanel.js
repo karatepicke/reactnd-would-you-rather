@@ -1,11 +1,18 @@
 import React from 'react';
-import { Tab } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { _getQuestions } from '../data/_DATA';
 import { getUnansweredQuestionsForSignedInUser } from '../store/actions/user';
 
+// API
+import { _getQuestions } from '../data/_DATA';
+
+// UI
+import { Tab, Divider } from 'semantic-ui-react';
+
 class QuestionsPanel extends React.Component {
-  componentWillMount() {
+  state = {}
+
+  getUnansweredQuestions() {
     if (this.props.user) {
       _getQuestions()
         .then((questions) => {
@@ -24,18 +31,29 @@ class QuestionsPanel extends React.Component {
     }
   }
 
+  // Event handlers
+  handleRadioChange = (e, { value }) => {
+    console.log(value)
+    this.setState({ value })
+  }
+
+  componentWillMount() {
+    this.getUnansweredQuestions();
+  }
+
   render() {
     if (!this.props.user) {
       return null
     }
-
     const unansweredQuestions = this.props.unansweredQuestions.map((unsansweredQuestion) => {
       return (
-        <div className="panel--question">
-          <h2>Would you rather?</h2>
-          <p>{unsansweredQuestion.optionOne.text}</p>
-          <p>{unsansweredQuestion.optionTwo.text}</p>
-        </div>
+        <Link to={"questions/" + unsansweredQuestion.id} >
+          <div className="panel--question__preview">
+            <p>Asked by {unsansweredQuestion.author}</p>
+            <Divider />
+            <h3>{unsansweredQuestion.optionOne.text}</h3>
+          </div>
+        </Link >
       )
     })
 

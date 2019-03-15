@@ -39,7 +39,7 @@
 
 /* QUESTIONS PANEL */
 
-.panel--question {
+.panel--question__preview {
   border: 0.1rem solid #800020;
   border-radius: .4rem;
   padding: 1rem;
