@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import authedUser from './authedUser';
-import users from './users';
+import user from './user';
 import questions from './questions';
 
 export const rootReducer = combineReducers({
-  authedUser,
-  users,
+  user,
   questions,
 });

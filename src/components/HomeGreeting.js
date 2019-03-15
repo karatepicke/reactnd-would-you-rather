@@ -18,7 +18,7 @@ class HomeGreeting extends React.Component {
             <p>"Would you rather" is a game that lets you answer questions by choosing
             one of two given options. To answer or post questions you need to <Link to="/login">login</Link>.</p>
             <h3><Icon name='trophy' />Gather points and climb the leaderboard</h3>
-            <p>Gather points and climb the leaderboard by answering questions and 
+            <p>Gather points and climb the leaderboard by answering questions and
             submitting your own ones.</p>
           </Segment>
         </Segment>
@@ -43,5 +43,5 @@ class HomeGreeting extends React.Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => ({ user: authedUser.user })
+const mapStateToProps = ({ user }) => ({ user: user.user })
 export default connect(mapStateToProps)(HomeGreeting);

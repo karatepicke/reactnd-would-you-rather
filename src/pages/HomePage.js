@@ -1,13 +1,12 @@
 import React from 'react';
-import { Container, Segment, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 
 import WYRNavbar from '../components/Navigation';
 import HomeGreeting from '../components/HomeGreeting';
 
 class HomePage extends React.Component {
   render() {
-    return(
+    return (
       <div className="home">
         <WYRNavbar active="home" />
         <section className="intro-teaser grayscale ">
@@ -15,7 +14,7 @@ class HomePage extends React.Component {
             <HomeGreeting />
           </Container>
         </section>
-      </div> 
+      </div>
     )
   }
 }

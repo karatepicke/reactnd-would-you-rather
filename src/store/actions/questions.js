@@ -1,5 +1,5 @@
 import { saveQuestionAnswer, saveQuestion } from '../../APIUtils/APIfunctions';
-import { handleAddQuestionToUser, handleAddAnswerToUser } from './users';
+import { handleAddQuestionToUser, handleAddAnswerToUser } from './user';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -34,25 +34,25 @@ export function receiveQuestions(questions) {
   }
 }
 
-function answerQuestion(authedUser, qid, answer) {
+function answerQuestion(user, qid, answer) {
   return {
     type: ANSWER_QUESTION,
-    authedUser,
+    user,
     qid,
     answer
   }
 }
 
-export function handleAnswerQuestion(authedUser, qid, answer) {
+export function handleAnswerQuestion(user, qid, answer) {
   return (dispatch) => {
     return saveQuestionAnswer({
       qid,
-      authedUser,
+      user,
       answer
     })
-      .then(({ authedUser, qid, answer }) => {
-        dispatch(answerQuestion(authedUser, qid, answer))
-        dispatch(handleAddAnswerToUser(authedUser, qid, answer))
+      .then(({ user, qid, answer }) => {
+        dispatch(answerQuestion(user, qid, answer))
+        dispatch(handleAddAnswerToUser(user, qid, answer))
       })
   }
 }

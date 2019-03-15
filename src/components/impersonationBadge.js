@@ -9,14 +9,14 @@ class ImpersonationBadge extends React.Component {
     }
     return (
       <div className="impersonation-badge">
-        <img className="impersonation-badge--avatar" src={this.getImageUrl()}></img>
+        <img className="impersonation-badge--avatar" src={this.getImageUrl()} alt="User-Avatar" />
         <span>{this.props.user.name}</span>
       </div >
     )
   }
 
   getImageUrl() {
-    if (this.props.user.avatarURL === '' || this.props.user.avatarURL === undefined ) {
+    if (this.props.user.avatarURL === '' || this.props.user.avatarURL === undefined) {
       return placeholderImg
     } else {
       return this.props.user.avatarURL
@@ -24,5 +24,5 @@ class ImpersonationBadge extends React.Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => ({ user: authedUser.user })
+const mapStateToProps = ({ user }) => ({ user: user.user })
 export default connect(mapStateToProps)(ImpersonationBadge);

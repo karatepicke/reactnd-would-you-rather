@@ -1,5 +1,5 @@
 import React from 'react';
-import ImpersonationBadge from '../components/ImpersonationBadge';
+import ImpersonationBadge from './ImpersonationBadge';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import LoginLogout from './LoginLogout';

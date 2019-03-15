@@ -28,5 +28,5 @@ class NewQuestionPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => ({ user: authedUser.user })
+const mapStateToProps = ({ user }) => ({ user: user.user })
 export default connect(mapStateToProps)(NewQuestionPage);
