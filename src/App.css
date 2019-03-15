@@ -21,7 +21,7 @@
   background-image: url('./floral-seamless-pattern.jpg');
   height: 100vh;
 }
-  
+
 /* NAVIGATION */
 
 .impersonation-badge {
@@ -35,6 +35,15 @@
   width: 1.8rem !important;
   border-radius: 50%;
   margin-right: .75rem !important;
+}
+
+/* QUESTIONS PANEL */
+
+.panel--question {
+  border: 0.1rem solid #800020;
+  border-radius: .4rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* TYPOGRAPHY  */
