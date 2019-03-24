@@ -9,6 +9,7 @@ class NotFound extends React.Component {
       <div className="login">
         <WYRNavbar active="questions" />
         <p>{this.props.user.name}</p>
+        Content not found.
       </div>
     )
   }
