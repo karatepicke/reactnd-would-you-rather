@@ -1,7 +1,7 @@
 import {
   SET_AUTHED_USER,
   DESTROY_AUTHED_USER,
-  GET_UNSANSWERED_QUESTIONS_FOR_SIGNED_IN_USER
+  GET_UNANSWERED_QUESTIONS_FOR_SIGNED_IN_USER
 } from '../actions/user';
 
 const initialState = {
@@ -21,7 +21,7 @@ export default function user(state = initialState, action) {
         ...state,
         user: undefined
       }
-    case GET_UNSANSWERED_QUESTIONS_FOR_SIGNED_IN_USER:
+    case GET_UNANSWERED_QUESTIONS_FOR_SIGNED_IN_USER:
       return {
         ...state,
         unansweredQuestions: action.payload.questions
