@@ -71,7 +71,7 @@ class QuestionForm extends React.Component {
           <Grid columns={2} divided>
             <Grid.Column width={5}>
               <h3>{this.props.currentQuestion.author} asks:</h3>
-              <div class="center-image">
+              <div className="center-image">
                 <img className="question-author--avatar" src={this.getAuthorAvatarUrl()} alt="User-Avatar" />
               </div>
             </Grid.Column>
