@@ -6,12 +6,12 @@ import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user'
 import { saveQuestionAnswer } from '../../store/actions/questions';
 
 // UI
-import { Segment, Form, Grid, Divider } from 'semantic-ui-react';
+import { Segment, Grid, Divider } from 'semantic-ui-react';
 
 // API
 import { _getQuestions, _getUsers } from '../../data/_DATA';
 
-class QuestionForm extends React.Component {
+class QuestionResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +21,11 @@ class QuestionForm extends React.Component {
   }
 
   componentWillMount() {
+    if (!this.props.user) {
+      this.props.history.push('/login')
+      return
+    }
+
     this.getAuthorAvatarUrl();
   }
 
@@ -43,19 +48,6 @@ class QuestionForm extends React.Component {
     }
   }
 
-  // Event handlers
-  handleRadioChange(currentTarget) {
-    this.setState({
-      checked: currentTarget
-    })
-  }
-
-  handleFormSubmit(e) {
-    e.preventDefault()
-    this.props.dispatch(saveQuestionAnswer(this.props.authedUser, this.props.currentQuestion.id, this.state.checked))
-    this.props.history.push(`/results/${this.props.currentQuestion.id}`)
-  }
-
   getAuthorAvatarUrl() {
     _getUsers().then((users) => {
       const authorId = this.props.currentQuestion.author
@@ -75,41 +67,17 @@ class QuestionForm extends React.Component {
           <Divider />
           <Grid columns={2} divided>
             <Grid.Column width={5}>
-              <h3>{this.props.currentQuestion.author} asks:</h3>
+              <h3>{this.props.currentQuestion.author} asked:</h3>
               <div className="center-image">
                 <img
                   className="question-author--avatar"
+                  // src=""
                   src={this.state.authorAvatar}
                   alt="User-Avatar" />
               </div>
             </Grid.Column>
             <Grid.Column>
-              <Form onSubmit={this.handleFormSubmit.bind(this)}>
-                <div className="ui radio checkbox">
-                  <input
-                    onChange={this.handleRadioChange.bind(this, 'optionOne')}
-                    readOnly={true}
-                    tabIndex={0}
-                    type="radio"
-                    name="optionOne"
-                    checked={this.state.checked === 'optionOne'}
-                    value="optionOne" />
-                  <label>{this.props.currentQuestion.optionOne.text}</label>
-                </div>
-
-                <div className="ui radio checkbox">
-                  <input
-                    onChange={this.handleRadioChange.bind(this, 'optionTwo')}
-                    readOnly={true}
-                    tabIndex={0}
-                    type="radio"
-                    name="optionTwo"
-                    checked={this.state.checked === 'optionTwo'}
-                    value="optionTwo" />
-                  <label>{this.props.currentQuestion.optionTwo.text}</label>
-                </div>
-                <Form.Button>Submit</Form.Button>
-              </Form>
+              HAHAHAHA
             </Grid.Column>
           </Grid>
         </Segment>
@@ -121,4 +89,4 @@ class QuestionForm extends React.Component {
 const mapStateToProps = ({ user }) => ({
   user: user.user
 })
-export default connect(mapStateToProps)(QuestionForm);
+export default connect(mapStateToProps)(QuestionResult);

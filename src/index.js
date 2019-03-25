@@ -16,6 +16,7 @@ import NewQuestionPage from './pages/NewQuestionPage';
 import SingleQuestionPage from './pages/SingleQuestionPage';
 import AnswersPage from './pages/AnswersPage';
 import LeaderboardPage from './pages/LeaderboardPage';
+import ResultPage from './pages/ResultPage';
 
 // Styles
 import './index.css';
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path="/login" component={LoginPage} />
         <Route path="/add" component={NewQuestionPage} />
         <Route path="/questions/:id" component={SingleQuestionPage} />
+        <Route path='/results/:id' exact component={ResultPage} />
         <Route path="/answers" component={AnswersPage} />
         <Route path="/leaderboard" component={LeaderboardPage} />
         <Route component={NotFound} />
