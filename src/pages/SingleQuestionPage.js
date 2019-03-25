@@ -34,7 +34,7 @@ class SingleQuestionPage extends React.Component {
     return (
       <div className="question">
         <WYRNavbar active="home" />
-        <Container >
+        <Container className="my-container">
           <QuestionForm currentQuestion={this.props.currentQuestion} />
         </Container>
       </div >
