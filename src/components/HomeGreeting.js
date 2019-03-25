@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import QuestionsPanel from './QuestionsPanel';
 
 // UI
-import { Segment, Icon, Header, Button } from 'semantic-ui-react';
+import { Segment, Icon, Header } from 'semantic-ui-react';
 
 class HomeGreeting extends React.Component {
   render() {
