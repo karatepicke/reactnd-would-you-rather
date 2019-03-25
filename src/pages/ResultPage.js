@@ -15,13 +15,6 @@ class ResultPage extends React.Component {
   }
 
   render() {
-    let optionOneVotes = 0
-    let optionTwoVotes = 0
-    let optionOnePercentage = 0
-    let optionTwoPercentage = 0
-    let total = 0
-    let authedUserAnswer = ''
-
     return (
       <div>
         <WYRNavbar />

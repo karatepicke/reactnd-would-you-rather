@@ -6,7 +6,7 @@ import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user'
 import { saveQuestionAnswer } from '../../store/actions/questions';
 
 // UI
-import { Segment, Grid, Divider } from 'semantic-ui-react';
+import { Segment, Grid, Divider, Container } from 'semantic-ui-react';
 
 // API
 import { _getQuestions, _getUsers } from '../../data/_DATA';
@@ -57,6 +57,23 @@ class QuestionResult extends React.Component {
   }
 
   render() {
+    let optionOneVotes = 0
+    let optionTwoVotes = 0
+    let optionOnePercentage = 0
+    let optionTwoPercentage = 0
+    let total = 0
+    let authedUserAnswer = ''
+
+    if (question !== undefined) {
+      optionOneVotes = Number(question.optionOne.votes.length)
+      optionTwoVotes = Number(question.optionTwo.votes.length)
+      total = optionOneVotes + optionTwoVotes
+      optionOnePercentage = (optionOneVotes / total) * 100
+      optionTwoPercentage = (optionTwoVotes / total) * 100
+      authedUserAnswer = users[authedUser].answers[this.props.currentQuestion.id]
+    }
+
+
     if (!this.props.currentQuestion) {
       return null
     }
@@ -76,9 +93,21 @@ class QuestionResult extends React.Component {
                   alt="User-Avatar" />
               </div>
             </Grid.Column>
-            <Grid.Column>
-              {this.props.currentQuestion.optionOne.text}
-              {this.props.currentQuestion.optionTwo.text}
+            <Grid.Column width={11}>
+              <Grid.Row columns={2}>
+                <Grid.Column textAlign='center'>
+                  <div className="result-box">
+                    <h3>Would you rather {this.props.currentQuestion.optionOne.text}?</h3>
+                    <p className="votes">{optionOneVotes} out of {total} votes - {optionOnePercentage.toFixed(1)}%</p>
+                  </div>
+                </Grid.Column>
+                <Grid.Column textAlign='center'>
+                  <div className="result-box">
+                    <h3>Would you rather {this.props.currentQuestion.optionTwo.text}?</h3>
+                    <p className="votes">{optionTwoVotes} out of {total} votes - {optionTwoPercentage.toFixed(1)}%</p>
+                  </div>
+                </Grid.Column>
+              </Grid.Row>
             </Grid.Column>
           </Grid>
         </Segment>
