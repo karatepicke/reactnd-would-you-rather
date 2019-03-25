@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './store/reducers/rootReducer';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Pages
@@ -20,20 +20,22 @@ import LeaderboardPage from './pages/LeaderboardPage';
 // Styles
 import './index.css';
 import './App.css';
+import NotFound from './pages/404';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <div>
+      <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/add" component={NewQuestionPage} />
         <Route path="/questions/:id" component={SingleQuestionPage} />
         <Route path="/answers" component={AnswersPage} />
         <Route path="/leaderboard" component={LeaderboardPage} />
-      </div>
+        <Route component={NotFound} />
+      </Switch>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
