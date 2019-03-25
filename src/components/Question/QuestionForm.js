@@ -1,12 +1,14 @@
 import React from 'react';
-import { Form, Divider } from 'semantic-ui-react';
 import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user';
 import { connect } from 'react-redux';
+
+// UI
+import { Segment, Form, Grid, Divider } from 'semantic-ui-react';
 
 // API
 import { _getQuestions, _saveQuestionAnswer } from '../../data/_DATA';
 
-
+const placeholderImg = 'https://semantic-ui.com/images/wireframe/image.png'
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -44,10 +46,17 @@ class QuestionForm extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    console.log(this.props.user.id)
     _saveQuestionAnswer({ authedUser: this.props.user.id, qid: this.props.currentQuestion.id, answer: this.state.checked }).then((question) => {
       console.log(question)
     })
+  }
+
+  getAuthorAvatarUrl() {
+    if (this.props.currentQuestion.author.avatarURL === '' || this.props.currentQuestion.author.avatarURL === undefined) {
+      return placeholderImg
+    } else {
+      return this.props.currentQuestion.author.avatarURL
+    }
   }
 
   render() {
@@ -56,34 +65,46 @@ class QuestionForm extends React.Component {
     }
     return (
       <div className="panel--question">
-        <Divider />
-        <h2>Would you rather?</h2>
-        <Form onSubmit={this.handleFormSubmit.bind(this)}>
-          <div className="ui radio checkbox">
-            <input
-              onChange={this.handleRadioChange.bind(this, 'optionOne')}
-              readOnly={true}
-              tabIndex={0}
-              type="radio"
-              name="optionOne"
-              checked={this.state.checked === 'optionOne'}
-              value="optionOne" />
-            <label>{this.props.currentQuestion.optionOne.text}</label>
-          </div>
+        <Segment>
+          <h2>Would you rather?</h2>
+          <Divider />
+          <Grid columns={2} divided>
+            <Grid.Column width={5}>
+              <h3>{this.props.currentQuestion.author} asks:</h3>
+              <div class="center-image">
+                <img className="question-author--avatar" src={this.getAuthorAvatarUrl()} alt="User-Avatar" />
+              </div>
+            </Grid.Column>
+            <Grid.Column>
+              <Form onSubmit={this.handleFormSubmit.bind(this)}>
+                <div className="ui radio checkbox">
+                  <input
+                    onChange={this.handleRadioChange.bind(this, 'optionOne')}
+                    readOnly={true}
+                    tabIndex={0}
+                    type="radio"
+                    name="optionOne"
+                    checked={this.state.checked === 'optionOne'}
+                    value="optionOne" />
+                  <label>{this.props.currentQuestion.optionOne.text}</label>
+                </div>
 
-          <div className="ui radio checkbox">
-            <input
-              onChange={this.handleRadioChange.bind(this, 'optionTwo')}
-              readOnly={true}
-              tabIndex={0}
-              type="radio"
-              name="optionTwo"
-              checked={this.state.checked === 'optionTwo'}
-              value="optionTwo" />
-            <label>{this.props.currentQuestion.optionTwo.text}</label>
-          </div>
-          <Form.Button>Submit</Form.Button>
-        </Form>
+                <div className="ui radio checkbox">
+                  <input
+                    onChange={this.handleRadioChange.bind(this, 'optionTwo')}
+                    readOnly={true}
+                    tabIndex={0}
+                    type="radio"
+                    name="optionTwo"
+                    checked={this.state.checked === 'optionTwo'}
+                    value="optionTwo" />
+                  <label>{this.props.currentQuestion.optionTwo.text}</label>
+                </div>
+                <Form.Button>Submit</Form.Button>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Segment>
       </div >
     )
   }

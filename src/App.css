@@ -46,6 +46,15 @@
   margin-bottom: 1rem;
 }
 
+img.question-author--avatar {
+  border-radius: 50%;
+  max-width: 20rem;
+}
+
+.center-image {
+  text-align: center;
+}
+
 /* TYPOGRAPHY  */
 
 h1,
