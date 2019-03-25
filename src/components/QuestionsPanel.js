@@ -70,7 +70,7 @@ class QuestionsPanel extends React.Component {
     }
     const unansweredQuestions = this.props.unansweredQuestions.map((unansweredQuestion) => {
       return (
-        <Link to={"questions/" + unansweredQuestion.id} >
+        <Link key={unansweredQuestion.id} to={"questions/" + unansweredQuestion.id} >
           <div className="panel--question__preview">
             <p>Asked by {unansweredQuestion.author}</p>
             <Divider />
@@ -83,7 +83,7 @@ class QuestionsPanel extends React.Component {
     })
     const answeredQuestions = this.props.answeredQuestions.map((answeredQuestion) => {
       return (
-        <Link to={"questions/" + answeredQuestion.id} >
+        <Link key={answeredQuestion.id} to={"questions/" + answeredQuestion.id} >
           <div className="panel--question__preview">
             <p>Asked by {answeredQuestion.author}</p>
             <Divider />
@@ -96,8 +96,8 @@ class QuestionsPanel extends React.Component {
     })
 
     const panes = [
-      { menuItem: 'Unanswered Questions', render: () => <Tab.Pane>{unansweredQuestions}</Tab.Pane> },
-      { menuItem: 'Answered Questions', render: () => <Tab.Pane>{answeredQuestions}</Tab.Pane> }
+      { key: 1, menuItem: 'Unanswered Questions', render: () => <Tab.Pane>{unansweredQuestions}</Tab.Pane> },
+      { key: 2, menuItem: 'Answered Questions', render: () => <Tab.Pane>{answeredQuestions}</Tab.Pane> }
     ]
 
     return (
