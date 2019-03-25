@@ -77,7 +77,8 @@ class QuestionResult extends React.Component {
               </div>
             </Grid.Column>
             <Grid.Column>
-              HAHAHAHA
+              {this.props.currentQuestion.optionOne.text}
+              {this.props.currentQuestion.optionTwo.text}
             </Grid.Column>
           </Grid>
         </Segment>
