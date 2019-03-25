@@ -33,7 +33,6 @@ class SignInUpForm extends React.Component {
             position='right center'
             on='focus'
           />
-          {/* <input placeholder='Password' type="password" name="password" value={this.state.password} onChange={this.handleInputChange.bind(this)} /> */}
         </Form.Field>
         <Button type='submit'>Login</Button>
       </Form>
