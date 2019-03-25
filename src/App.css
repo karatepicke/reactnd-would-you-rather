@@ -60,6 +60,7 @@ img.question-author--avatar {
   min-height: 15rem;
   width: auto;
   background-color: rgb(249, 250, 251);
+  border: 0.1rem solid;
   border-radius: .5rem;
   border-color: rgba(34, 36, 38, 0.15);
   margin-bottom: 1rem;
