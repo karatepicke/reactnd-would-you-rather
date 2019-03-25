@@ -60,3 +60,16 @@ export function handleAddAnswerToUser(authedUser, qid, answer) {
     dispatch(addAnswerToUser(authedUser, qid, answer))
   }
 }
+
+function addQuestionToUser (question){
+  return{
+    type: ADD_QUESTION_TO_USER,
+    question,
+  }
+}
+
+export function handleAddQuestionToUser (info) {
+  return (dispatch) => {
+    dispatch(addQuestionToUser(info))
+  }
+}
