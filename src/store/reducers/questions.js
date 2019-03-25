@@ -2,12 +2,16 @@ import {
   GET_SINGLE_QUESTION
 } from '../actions/questions';
 
-export default function questions(state = {}, action) {
+const initialState = {
+  currentQuestion: undefined
+}
+
+export default function questions(state = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_QUESTION:
       return {
         ...state,
-        ...action.questions
+        currentQuestion: action.question
       }
     default:
       return state

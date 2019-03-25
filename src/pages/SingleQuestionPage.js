@@ -10,18 +10,23 @@ import { Container } from 'semantic-ui-react';
 // custom Components
 import WYRNavbar from '../components/Navigation';
 import QuestionForm from '../components/Question/QuestionForm';
+import { getSingleQuestion } from '../store/actions/questions';
 
 
 class SingleQuestionPage extends React.Component {
-  componentDidMount() {
-    const questionId = this.props.match.params.id
-    console.log(questionId)
-  }
-
   componentWillMount() {
+    const questionId = this.props.match.params.id
+
     if (!this.props.user) {
       this.props.history.push('/login')
+      return
     }
+    _getQuestions().then((questions) => {
+      const currentQuestion = questions[questionId]
+      if (currentQuestion) {
+        this.props.dispatch(getSingleQuestion(currentQuestion))
+      }
+    })
   }
 
   render() {
@@ -30,14 +35,15 @@ class SingleQuestionPage extends React.Component {
       <div className="question">
         <WYRNavbar active="home" />
         <Container >
-          <QuestionForm unansweredQuestion={this.props.unsansweredQuestion} />
+          <QuestionForm currentQuestion={this.props.currentQuestion} />
         </Container>
       </div >
     )
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  user: user.user
+const mapStateToProps = ({ user, questions }) => ({
+  user: user.user,
+  currentQuestion: questions.currentQuestion
 })
 export default connect(mapStateToProps)(SingleQuestionPage);
