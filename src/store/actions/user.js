@@ -45,3 +45,18 @@ export function getAnsweredQuestionsForSignedInUser(questions) {
     }
   }
 }
+
+function addAnswerToUser(authedUser, qid, answer) {
+  return {
+    type: ADD_ANSWER_TO_USER,
+    authedUser,
+    qid,
+    answer,
+  }
+}
+
+export function handleAddAnswerToUser(authedUser, qid, answer) {
+  return (dispatch) => {
+    dispatch(addAnswerToUser(authedUser, qid, answer))
+  }
+}

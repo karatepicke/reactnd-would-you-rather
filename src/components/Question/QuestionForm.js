@@ -1,14 +1,15 @@
 import React from 'react';
-import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user';
 import { connect } from 'react-redux';
+
+// Actions
+import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user';
+import { saveQuestionAnswer } from '../../store/actions/questions';
 
 // UI
 import { Segment, Form, Grid, Divider } from 'semantic-ui-react';
 
 // API
-import { _getQuestions, _saveQuestionAnswer, _getUsers } from '../../data/_DATA';
-
-const placeholderImg = 'https://semantic-ui.com/images/wireframe/image.png'
+import { _getQuestions, _getUsers } from '../../data/_DATA';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -51,9 +52,8 @@ class QuestionForm extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    _saveQuestionAnswer({ authedUser: this.props.user.id, qid: this.props.currentQuestion.id, answer: this.state.checked }).then((question) => {
-      console.log(question)
-    })
+    this.props.dispatch(saveQuestionAnswer(this.props.authedUser, this.props.currentQuestion.id, this.state.checked))
+    this.props.history.push('/')
   }
 
   getAuthorAvatarUrl() {
