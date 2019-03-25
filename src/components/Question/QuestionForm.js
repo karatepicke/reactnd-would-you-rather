@@ -6,7 +6,7 @@ import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user'
 import { saveQuestionAnswer } from '../../store/actions/questions';
 
 // UI
-import { Segment, Form, Grid, Divider } from 'semantic-ui-react';
+import { Segment, Form, Grid, Divider, Placeholder } from 'semantic-ui-react';
 
 // API
 import { _getQuestions, _getUsers } from '../../data/_DATA';
@@ -16,6 +16,7 @@ class QuestionForm extends React.Component {
     super(props);
     this.state = {
       checked: 'optionOne',
+      loadingAvatar: true,
       authorAvatar: ''
     }
   }
@@ -60,11 +61,16 @@ class QuestionForm extends React.Component {
     _getUsers().then((users) => {
       const authorId = this.props.currentQuestion.author
 
-      this.setState({ authorAvatar: users[authorId].avatarURL })
+      this.setState({ 
+        loadingAvatar: false,
+        authorAvatar: users[authorId].avatarURL 
+      })
     })
   }
 
   render() {
+    const { loadingAvatar } = this.state
+
     if (!this.props.currentQuestion) {
       return null
     }
@@ -77,38 +83,49 @@ class QuestionForm extends React.Component {
             <Grid.Column width={5}>
               <h3>{this.props.currentQuestion.author} asks:</h3>
               <div className="center-image">
-                <img
-                  className="question-author--avatar"
-                  src={this.state.authorAvatar}
-                  alt="User-Avatar" />
+                {loadingAvatar ? (
+                  <Placeholder className="question-author__avatar--placeholder">
+                    <Placeholder.Image square />
+                  </Placeholder>
+                ) : (
+                  <img
+                    className="question-author__avatar"
+                    src={this.state.authorAvatar}
+                    alt="User-Avatar" />
+                )}
               </div>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={11}>
               <Form onSubmit={this.handleFormSubmit.bind(this)}>
-                <div className="ui radio checkbox">
-                  <input
-                    onChange={this.handleRadioChange.bind(this, 'optionOne')}
-                    readOnly={true}
-                    tabIndex={0}
-                    type="radio"
-                    name="optionOne"
-                    checked={this.state.checked === 'optionOne'}
-                    value="optionOne" />
-                  <label>{this.props.currentQuestion.optionOne.text}</label>
-                </div>
-
-                <div className="ui radio checkbox">
-                  <input
-                    onChange={this.handleRadioChange.bind(this, 'optionTwo')}
-                    readOnly={true}
-                    tabIndex={0}
-                    type="radio"
-                    name="optionTwo"
-                    checked={this.state.checked === 'optionTwo'}
-                    value="optionTwo" />
-                  <label>{this.props.currentQuestion.optionTwo.text}</label>
-                </div>
+                <Grid.Row columns={2}>
+                  <Grid.Column textAlign='center' className="question-box">
+                    <div className="ui radio checkbox">
+                      <input
+                        onChange={this.handleRadioChange.bind(this, 'optionOne')}
+                        readOnly={true}
+                        tabIndex={0}
+                        type="radio"
+                        name="optionOne"
+                        checked={this.state.checked === 'optionOne'}
+                        value="optionOne" />
+                      <label>{this.props.currentQuestion.optionOne.text}</label>
+                    </div>
+                  </Grid.Column>
+                  <Grid.Column textAlign='center' className="question-box">
+                    <div className="ui radio checkbox">
+                      <input
+                        onChange={this.handleRadioChange.bind(this, 'optionTwo')}
+                        readOnly={true}
+                        tabIndex={0}
+                        type="radio"
+                        name="optionTwo"
+                        checked={this.state.checked === 'optionTwo'}
+                        value="optionTwo" />
+                      <label>{this.props.currentQuestion.optionTwo.text}</label>
+                    </div>
+                  </Grid.Column>
                 <Form.Button>Submit</Form.Button>
+                </Grid.Row>
               </Form>
             </Grid.Column>
           </Grid>
