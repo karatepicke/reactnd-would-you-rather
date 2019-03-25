@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 // API
 import { _getQuestions } from '../data/_DATA';
 
+// Actions
+import { getSingleQuestion } from '../store/actions/questions';
+
 // UI
 import { Container } from 'semantic-ui-react';
 
 // custom Components
 import WYRNavbar from '../components/Navigation';
 import QuestionForm from '../components/Question/QuestionForm';
-import { getSingleQuestion } from '../store/actions/questions';
 
 
 class SingleQuestionPage extends React.Component {
