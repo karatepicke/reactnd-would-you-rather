@@ -53,28 +53,6 @@ class QuestionsPanel extends React.Component {
     }
   }
 
-  answeredQuestionsHelper() {
-    if (this.props.answeredQuestions) {
-      this.props.answeredQuestions.map((answeredQuestion) => {
-        return (
-          <Link to={"questions/" + answeredQuestion.id} >
-            <div className="panel--question__preview">
-              <p>Asked by {answeredQuestion.author}</p>
-              <Divider />
-              <h3>Would you rather...</h3>
-              <p>...{answeredQuestion.optionOne.text}</p>
-              <p>...{answeredQuestion.optionTwo.text}</p>
-            </div>
-          </Link >
-        )
-      })
-    } else {
-      return (
-        <p>No answered questions available.</p>
-      )
-    }
-  }
-
   // Event handlers
   handleRadioChange = (e, { value }) => {
     console.log(value)
@@ -103,7 +81,19 @@ class QuestionsPanel extends React.Component {
         </Link >
       )
     })
-    const answeredQuestions = this.answeredQuestionsHelper();
+    const answeredQuestions = this.props.answeredQuestions.map((answeredQuestion) => {
+      return (
+        <Link to={"questions/" + answeredQuestion.id} >
+          <div className="panel--question__preview">
+            <p>Asked by {answeredQuestion.author}</p>
+            <Divider />
+            <h3>Would you rather...</h3>
+            <p>...{answeredQuestion.optionOne.text}</p>
+            <p>...{answeredQuestion.optionTwo.text}</p>
+          </div>
+        </Link >
+      )
+    })
 
     const panes = [
       { menuItem: 'Unanswered Questions', render: () => <Tab.Pane>{unansweredQuestions}</Tab.Pane> },
