@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Segment, Form, Grid, Divider } from 'semantic-ui-react';
 
 // API
-import { _getQuestions, _saveQuestionAnswer } from '../../data/_DATA';
+import { _getQuestions, _saveQuestionAnswer, _getUsers } from '../../data/_DATA';
 
 const placeholderImg = 'https://semantic-ui.com/images/wireframe/image.png'
 
@@ -14,8 +14,13 @@ class QuestionForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: 'optionOne'
+      checked: 'optionOne',
+      authorAvatar: ''
     }
+  }
+
+  componentWillMount() {
+    this.getAuthorAvatarUrl();
   }
 
   getUnansweredQuestions() {
@@ -52,11 +57,11 @@ class QuestionForm extends React.Component {
   }
 
   getAuthorAvatarUrl() {
-    if (this.props.currentQuestion.author.avatarURL === '' || this.props.currentQuestion.author.avatarURL === undefined) {
-      return placeholderImg
-    } else {
-      return this.props.currentQuestion.author.avatarURL
-    }
+    _getUsers().then((users) => {
+      const authorId = this.props.currentQuestion.author
+
+      this.setState({ authorAvatar: users[authorId].avatarURL })
+    })
   }
 
   render() {
@@ -72,7 +77,10 @@ class QuestionForm extends React.Component {
             <Grid.Column width={5}>
               <h3>{this.props.currentQuestion.author} asks:</h3>
               <div className="center-image">
-                <img className="question-author--avatar" src={this.getAuthorAvatarUrl()} alt="User-Avatar" />
+                <img
+                  className="question-author--avatar"
+                  src={this.state.authorAvatar}
+                  alt="User-Avatar" />
               </div>
             </Grid.Column>
             <Grid.Column>
