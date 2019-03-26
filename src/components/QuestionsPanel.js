@@ -54,8 +54,7 @@ class QuestionsPanel extends React.Component {
   }
 
   // Event handlers
-  handleRadioChange = (e, { value }) => {
-    console.log(value)
+  handleRadioChange = ({ value }) => {
     this.setState({ value })
   }
 
