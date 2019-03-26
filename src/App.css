@@ -103,6 +103,25 @@ div.question-box .option-heading {
   background-color: green;
 }
 
+.result-box .voted-mark {
+  display: flex;
+  flex-direction: column;
+  padding: 0.2rem;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border: 0.1rem solid transparent;
+  border-radius: 50%;
+  background-color: #00b5ad;
+  color: white;
+}
+
+.result-box .voted-mark p {
+  font-weight: 600;
+  font-style: italic;
+}
+
 /* TYPOGRAPHY  */
 
 h1,

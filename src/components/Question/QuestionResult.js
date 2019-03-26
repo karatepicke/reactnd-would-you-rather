@@ -118,7 +118,7 @@ class QuestionResult extends React.Component {
                     <h3>Would you rather {this.props.currentQuestion.optionOne.text}?</h3>
                     <Progress percent={optionOnePercentage} progress color='teal' />
                     <p className="votes">{optionOneVotes} out of {total} votes</p>
-                    {votedOption === 'optionOne' && <Icon name='star' size='huge' />}
+                    {votedOption === 'optionOne' && <div className="voted-mark"><Icon name='check' size='big' /><p>Your vote</p></div>}
                   </div>
                 </Grid.Column>
                 <Grid.Column textAlign='center'>
@@ -126,7 +126,7 @@ class QuestionResult extends React.Component {
                     <h3>Would you rather {this.props.currentQuestion.optionTwo.text}?</h3>
                     <Progress percent={optionTwoPercentage} progress color='teal' />
                     <p className="votes">{optionTwoVotes} out of {total} votes</p>
-                    {votedOption === 'optionTwo' && <Icon name='star' size='huge' />}
+                    {votedOption === 'optionTwo' && <div className="voted-mark"><Icon name='check' size='big' /><p>Your vote</p></div>}
                   </div>
                 </Grid.Column>
               </Grid.Row>
