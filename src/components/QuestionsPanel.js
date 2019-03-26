@@ -71,12 +71,12 @@ class QuestionsPanel extends React.Component {
     const unansweredQuestions = this.props.unansweredQuestions.map((unansweredQuestion) => {
       return (
         <Link key={unansweredQuestion.id} to={"questions/" + unansweredQuestion.id} >
-          <div className="panel--question__preview">
+          <div className="panel--question__preview question-box">
             <p>Asked by {unansweredQuestion.author}</p>
             <Divider />
             <h3>Would you rather...</h3>
-            <p>...{unansweredQuestion.optionOne.text}</p>
-            <p>...{unansweredQuestion.optionTwo.text}</p>
+            <p>...{unansweredQuestion.optionOne.text}?</p>
+            <p>...{unansweredQuestion.optionTwo.text}?</p>
           </div>
         </Link >
       )
@@ -84,12 +84,12 @@ class QuestionsPanel extends React.Component {
     const answeredQuestions = this.props.answeredQuestions.map((answeredQuestion) => {
       return (
         <Link key={answeredQuestion.id} to={"questions/" + answeredQuestion.id} >
-          <div className="panel--question__preview">
+          <div className="panel--question__preview question-box">
             <p>Asked by {answeredQuestion.author}</p>
             <Divider />
             <h3>Would you rather...</h3>
-            <p>...{answeredQuestion.optionOne.text}</p>
-            <p>...{answeredQuestion.optionTwo.text}</p>
+            <p>...{answeredQuestion.optionOne.text}?</p>
+            <p>...{answeredQuestion.optionTwo.text}?</p>
           </div>
         </Link >
       )
