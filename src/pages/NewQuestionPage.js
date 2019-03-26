@@ -65,33 +65,35 @@ class NewQuestionPage extends React.Component {
     return (
       <div>
         <WYRNavbar active="questions" />
-        <Container className="my-container">
-        <Segment>
-          <h2>Your're posting as {this.props.user.name}</h2>
-          <span>Here you can post your own question for the community to answer</span>
-          <Icon name="question circle"/>
-          <p>Complete the question:</p>
-          <h3>Would you rather...</h3>
-          <Form onSubmit={this.handleFormSubmit.bind(this)}>
-          <Form.Field>
-            <label>Option One</label>
-            <input 
-              ref={input => this.optionOne = input}
-              placeholder='First option' 
-            />
-          </Form.Field>
-          <Divider horizontal>Or</Divider>
-          <Form.Field>
-            <label>Option Two</label>
-            <input 
-              ref={input => this.optionTwo = input}
-              placeholder='Second option' 
+        <section className="main">
+          <Container className="my-container">
+          <Segment>
+            <h2>Your're posting as {this.props.user.name}</h2>
+            <span>Here you can post your own question for the community to answer</span>
+            <Icon name="question circle"/>
+            <p>Complete the question:</p>
+            <h3>Would you rather...</h3>
+            <Form onSubmit={this.handleFormSubmit.bind(this)}>
+            <Form.Field>
+              <label>Option One</label>
+              <input 
+                ref={input => this.optionOne = input}
+                placeholder='First option' 
               />
-          </Form.Field>
-          <Form.Button>Submit</Form.Button>
-          </Form>
-        </Segment>
-        </Container>
+            </Form.Field>
+            <Divider horizontal>Or</Divider>
+            <Form.Field>
+              <label>Option Two</label>
+              <input 
+                ref={input => this.optionTwo = input}
+                placeholder='Second option' 
+                />
+            </Form.Field>
+            <Form.Button>Submit</Form.Button>
+            </Form>
+          </Segment>
+          </Container>
+        </section>
       </div>
     )
   }

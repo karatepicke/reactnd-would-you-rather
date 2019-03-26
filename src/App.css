@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 .App {
   text-align: center;
 }
@@ -17,9 +22,9 @@
   padding: 40px 0 40px 0;
 }
 
-.intro-teaser {
-  background-image: url('./floral-seamless-pattern.jpg');
+.main {
   height: 100vh;
+  background-image: url('./floral-seamless-pattern.jpg');
 }
 
 /* NAVIGATION */

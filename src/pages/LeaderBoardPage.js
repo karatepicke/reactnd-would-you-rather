@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+// UI
+import { Container } from 'semantic-ui-react';
+
 // custom components
 import WYRNavbar from '../components/Navigation';
 
@@ -18,7 +21,11 @@ class LeaderboardPage extends React.Component {
     return(
       <div className="leaderboard">
         <WYRNavbar active="leaderboard" />
-        
+        <section className="main">
+          <Container className="my-container">
+            <h2>Leaderboard</h2>
+          </Container>
+        </section>
       </div>
     )
   }

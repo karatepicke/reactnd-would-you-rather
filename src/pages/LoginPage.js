@@ -15,9 +15,11 @@ class LoginPage extends React.Component {
     return (
       <div className="login">
         <WYRNavbar active="login" />
-        <Container className="my-container">
-          <SignInUpPrompt />
-        </Container>
+        <section className="main">
+          <Container className="my-container">
+            <SignInUpPrompt />
+          </Container>
+        </section>
       </div>
     )
   }

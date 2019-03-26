@@ -11,11 +11,13 @@ class NotFound extends React.Component {
     return (
       <div className="login">
         <WYRNavbar active="questions" />
-        <Container className="my-container">
-          <h2>Error 404</h2>
-          <p>Content not found.</p>
-          <Link to="/">Return home.</Link>
-        </Container>
+        <section className="main">
+          <Container className="my-container">
+            <h2>Error 404</h2>
+            <p>Content not found.</p>
+            <Link to="/">Return home.</Link>
+          </Container>
+        </section>
       </div>
     )
   }

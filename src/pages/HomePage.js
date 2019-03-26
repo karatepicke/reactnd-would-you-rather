@@ -9,7 +9,7 @@ class HomePage extends React.Component {
     return (
       <div className="home">
         <WYRNavbar active="home" />
-        <section className="intro-teaser">
+        <section className="main">
           <Container className="my-container">
             <HomeGreeting />
           </Container>
