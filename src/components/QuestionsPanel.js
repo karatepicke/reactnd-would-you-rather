@@ -19,7 +19,7 @@ class QuestionsPanel extends React.Component {
   }
 
   componentWillMount() {
-    // this.getAuthorAvatarUrl();
+    this.getAuthorsAvatarUrls();
     this.getUnansweredQuestions();
     this.getAnsweredQuestions();
   }
@@ -62,20 +62,15 @@ class QuestionsPanel extends React.Component {
     }
   }
 
-  // getAuthorsAvatarUrls() {
-  //   console.log(this.props.unansweredQuestions)
-  //   _getUsers().then((users) => {
-  //     const authorIdArray = unansweredQuestion.author.id
-
-  //     this.setState({
-  //       loadingAvatars: false,
-  //       questionsAuthorsAvatars: {
-  //         ...state,
-  //         users[authorId].avatarURL
-  //       }
-  //     })
-  //   })
-  // }
+  getAuthorsAvatarUrls() {
+    _getUsers().then((users) => {
+      console.log(users)
+      this.setState({
+        questionsAuthorsAvatars: users,
+        loadingAvatars: false
+      })
+    })
+  }
 
   // Event handlers
   handleRadioChange = ({ value }) => {
@@ -86,24 +81,26 @@ class QuestionsPanel extends React.Component {
     if (!this.props.user) {
       return null
     }
-    console.log(this.props.unansweredQuestions)
     const { loadingAvatar } = this.state
 
     const unansweredQuestions = this.props.unansweredQuestions.map((unansweredQuestion) => {
       return (
         <Link key={unansweredQuestion.id} to={"questions/" + unansweredQuestion.id} >
           <div className="panel--question__preview question-box">
-            <span>Asked by {unansweredQuestion.author}</span>
-            {loadingAvatar ? (
-              <Placeholder className="home-question-author__avatar--placeholder">
-                <Placeholder.Image square />
-              </Placeholder>
-            ) : (
-                <img
-                  className="question-author__avatar"
-                  src={this.state.authorAvatar}
-                  alt="User-Avatar" />
-              )}
+            <div className="home-asked-by-wrapper">
+              <span>Asked by {unansweredQuestion.author}</span>
+              {loadingAvatar ? (
+                <Placeholder className="home-question-author__avatar--placeholder">
+                  <Placeholder.Image square />
+                </Placeholder>
+              ) : (
+                  <img
+                    className="home-question-author__avatar"
+                    src={this.state.questionsAuthorsAvatars[unansweredQuestion.author].avatarURL}
+                    alt="User-Avatar" 
+                  />
+                )}
+            </div>
             <Divider />
             <h3>Would you rather...</h3>
             <p>...{unansweredQuestion.optionOne.text}?</p>
@@ -116,17 +113,19 @@ class QuestionsPanel extends React.Component {
       return (
         <Link key={answeredQuestion.id} to={"questions/" + answeredQuestion.id} >
           <div className="panel--question__preview question-box">
-            <span>Asked by {answeredQuestion.author}</span>
-            {loadingAvatar ? (
-              <Placeholder className="home-question-author__avatar--placeholder">
-                <Placeholder.Image square />
-              </Placeholder>
-            ) : (
-                <img
-                  className="question-author__avatar"
-                  src={this.state.authorAvatar}
-                  alt="User-Avatar" />
-              )}
+            <div className="home-asked-by-wrapper">
+              <span>Asked by {answeredQuestion.author}</span>
+              {loadingAvatar ? (
+                <Placeholder className="home-question-author__avatar--placeholder">
+                  <Placeholder.Image square />
+                </Placeholder>
+              ) : (
+                  <img
+                    className="home-question-author__avatar"
+                    src={this.state.questionsAuthorsAvatars[answeredQuestion.author].avatarURL}
+                    alt="User-Avatar" />
+                )}
+            </div>
             <Divider />
             <h3>Would you rather...</h3>
             <p>...{answeredQuestion.optionOne.text}?</p>
