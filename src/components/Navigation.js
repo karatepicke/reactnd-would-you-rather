@@ -21,11 +21,6 @@ export default class WYRNavbar extends React.Component {
             name='questions'
             activeClassName="active"
           >Add Question</NavLink>
-          <NavLink to="/answers"
-            className="item"
-            name='answers'
-            activeClassName="active"
-          >Answers</NavLink>
           <NavLink to="/leaderboard"
             className="item"
             name='leaderboard'
