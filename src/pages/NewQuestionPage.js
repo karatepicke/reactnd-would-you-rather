@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import WYRNavbar from '../components/Navigation';
 
 // UI
-import { Container, Form } from 'semantic-ui-react';
+import { Container, Segment, Form, Icon, Divider } from 'semantic-ui-react';
 import { handleAddQuestion } from '../store/actions/questions';
+import { _saveQuestionAnswer, _saveQuestion } from '../data/_DATA';
 
 class NewQuestionPage extends React.Component {
   constructor(props) {
@@ -32,39 +33,29 @@ class NewQuestionPage extends React.Component {
   }
 
   // Event handlers
-  handleOptionOneChange = (optionOne) => {
-    this.setState({
-        optionOne,
-        optionsIncomplete: false,
-        questionAdded: false
-    });
-  }
-  handleOptionTwoChange = (optionTwo) => {
-    this.setState({
-        optionTwo,
-        optionsIncomplete: false,
-        questionAdded: false
-    });
-  }
-  handleAddQuestionClick = () => {
-    
-  }
-
   handleFormSubmit(e) {
-    // e.preventDefault()
-    // this.props.dispatch(saveQuestionAnswer(this.props.authedUser, this.props.currentQuestion.id, this.state.checked))
-    // this.props.history.push(`/results/${this.props.currentQuestion.id}`)
+    e.preventDefault()
+    const optionOneText = this.optionOne.value
+    const optionTwoText = this.optionTwo.value
+    console.log(optionOneText, optionTwoText )
+    
+    this.setState({
+        displayErrorMessage1:false,
+        displayErrorMessage2:false
+    })
 
-    if(this.state.optionOne.trim() === '' || this.state.optionTwo.trim() === ''){
-      this.setState({ 
-          optionsIncomplete: true,
-          optionOne: '',
-          optionTwo: '', 
-      })
-      return
-  }
-  this.props.dispatch(handleAddQuestion( this.state.optionOne, this.state.optionTwo, this.props.authedUser ))
-  this.setState({ questionAdded: true, optionOne: '', optionTwo: '' })
+    if(optionOneText && optionTwoText) {
+      _saveQuestion({
+          optionOneText,
+          optionTwoText,
+          author: this.props.user.id
+        })
+
+        this.props.history.push('/')
+    } else {
+        optionOneText === '' && this.setState(() => ({displayErrorMessage1:true}))
+        optionTwoText === '' && this.setState(() => ({displayErrorMessage2:true}))
+    }
   }
 
   render() {
@@ -75,17 +66,31 @@ class NewQuestionPage extends React.Component {
       <div>
         <WYRNavbar active="questions" />
         <Container className="my-container">
+        <Segment>
+          <h2>Your're posting as {this.props.user.name}</h2>
+          <span>Here you can post your own question for the community to answer</span>
+          <Icon name="question circle"/>
+          <p>Complete the question:</p>
+          <h3>Would you rather...</h3>
           <Form onSubmit={this.handleFormSubmit.bind(this)}>
           <Form.Field>
             <label>Option One</label>
-            <input placeholder='First option' />
+            <input 
+              ref={input => this.optionOne = input}
+              placeholder='First option' 
+            />
           </Form.Field>
+          <Divider horizontal>Or</Divider>
           <Form.Field>
             <label>Option Two</label>
-            <input placeholder='Second option' />
+            <input 
+              ref={input => this.optionTwo = input}
+              placeholder='Second option' 
+              />
           </Form.Field>
           <Form.Button>Submit</Form.Button>
           </Form>
+        </Segment>
         </Container>
       </div>
     )
@@ -97,44 +102,3 @@ const mapStateToProps = ({ user, questions }) => ({
   questions: questions.questions
 })
 export default connect(mapStateToProps)(NewQuestionPage);
-
-
-// render() {
-// const { questionAdded, optionsIncomplete } = this.state
-// return (
- 
-//         {questionAdded &&
-//           <p>
-//               <small className="pink-text">Question added. You can add more if you like </small>
-//           </p>}
-//         <div className="card center-block">
-//           <h3>
-//               <small>Add New Question</small>
-//           </h3>
-//           <p><small>Complete the Question:</small></p>
-//           <p><small>Would you rather...</small></p>
-//           <br />
-//           {optionsIncomplete &&
-//           <p>
-//               <small className="pink-text">Please fill options one & two</small>
-//           </p>}
-//           <input type="text" placeholder="Enter option one text here" onChange={(e) => this.handleOptionOneChange(e.target.value)}/>
-//           <span>Or</span>
-//           <input type="text" placeholder="Enter option two text here" onChange={(e) => this.handleOptionTwoChange(e.target.value)}/>
-//           <button className="addquestion" onClick={this.handleAddQuestionClick}>
-//               Add Question
-//           </button>
-
-
-// );
-// }
-// }
-
-// function mapStateToProps ({ authedUser, questions }) {
-// return {
-//   authedUser,
-//   questions,
-// }
-// }
-
-// export default connect(mapStateToProps)(AddQuestion)
