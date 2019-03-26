@@ -10,10 +10,6 @@ import QuestionResult from '../components/Question/QuestionResult';
 
 
 class ResultPage extends React.Component {
-  componentWillMount() {
-    const questionId = this.props.match.params.id
-  }
-
   render() {
     return (
       <div>

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 // Actions
 import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user';
-import { saveQuestionAnswer } from '../../store/actions/questions';
 
 // UI
 import { Segment, Grid, Divider, Placeholder, Icon, Progress } from 'semantic-ui-react';
@@ -53,27 +52,40 @@ class QuestionResult extends React.Component {
     _getUsers().then((users) => {
       const authorId = this.props.currentQuestion.author
 
-      this.setState({ 
+      this.setState({
         loadingAvatar: false,
-        authorAvatar: users[authorId].avatarURL 
+        authorAvatar: users[authorId].avatarURL
       })
     })
   }
 
+  getVotedOption() {
+    if (this.props.currentQuestion.optionOne.votes.includes(this.props.user.id)) {
+      return 'optionOne'
+    }
+
+    if (this.props.currentQuestion.optionTwo.votes.includes(this.props.user.id)) {
+      return 'optionTwo'
+    }
+
+    return ''
+  }
+
   render() {
-    const { loadingAvatar } = this.state 
+    if (!this.props.user) {
+      return null
+    }
+    const { loadingAvatar } = this.state
+    const votedOption = this.getVotedOption()
     let optionOneVotes, optionTwoVotes, optionOnePercentage, optionTwoPercentage, total = 0
-    let authedUserAnswer = ''
 
     if (this.props.currentQuestion !== undefined) {
       optionOneVotes = Number(this.props.currentQuestion.optionOne.votes.length)
       optionTwoVotes = Number(this.props.currentQuestion.optionTwo.votes.length)
       total = optionOneVotes + optionTwoVotes
-      optionOnePercentage = (optionOneVotes / total) * 100
-      optionTwoPercentage = (optionTwoVotes / total) * 100
-      authedUserAnswer = this.props.user.answers[this.props.currentQuestion.id]
+      optionOnePercentage = Math.floor((optionOneVotes / total) * 100)
+      optionTwoPercentage = Math.floor((optionTwoVotes / total) * 100)
     }
-
 
     if (!this.props.currentQuestion) {
       return null
@@ -87,16 +99,16 @@ class QuestionResult extends React.Component {
             <Grid.Column width={5}>
               <h3>{this.props.currentQuestion.author} asked:</h3>
               <div className="center-image">
-              {loadingAvatar ? (
-                <Placeholder className="question-author__avatar--placeholder">
-                  <Placeholder.Image square />
-                </Placeholder>
-              ) : (
-                <img
-                  className="question-author__avatar"
-                  src={this.state.authorAvatar}
-                  alt="User-Avatar" />
-              )}
+                {loadingAvatar ? (
+                  <Placeholder className="question-author__avatar--placeholder">
+                    <Placeholder.Image square />
+                  </Placeholder>
+                ) : (
+                    <img
+                      className="question-author__avatar"
+                      src={this.state.authorAvatar}
+                      alt="User-Avatar" />
+                  )}
               </div>
             </Grid.Column>
             <Grid.Column width={11}>
@@ -106,7 +118,7 @@ class QuestionResult extends React.Component {
                     <h3>Would you rather {this.props.currentQuestion.optionOne.text}?</h3>
                     <Progress percent={optionOnePercentage} progress color='teal' />
                     <p className="votes">{optionOneVotes} out of {total} votes</p>
-                    {authedUserAnswer === 'optionOne' && <Icon name='star' size='huge'/>}
+                    {votedOption === 'optionOne' && <Icon name='star' size='huge' />}
                   </div>
                 </Grid.Column>
                 <Grid.Column textAlign='center'>
@@ -114,7 +126,7 @@ class QuestionResult extends React.Component {
                     <h3>Would you rather {this.props.currentQuestion.optionTwo.text}?</h3>
                     <Progress percent={optionTwoPercentage} progress color='teal' />
                     <p className="votes">{optionTwoVotes} out of {total} votes</p>
-                    {authedUserAnswer === 'optionTwo' && <Icon name='star' size='huge'/>}
+                    {votedOption === 'optionTwo' && <Icon name='star' size='huge' />}
                   </div>
                 </Grid.Column>
               </Grid.Row>

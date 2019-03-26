@@ -2,7 +2,8 @@ import {
   SET_AUTHED_USER,
   DESTROY_AUTHED_USER,
   GET_UNANSWERED_QUESTIONS_FOR_SIGNED_IN_USER,
-  GET_ANSWERED_QUESTIONS_FOR_SIGNED_IN_USER
+  GET_ANSWERED_QUESTIONS_FOR_SIGNED_IN_USER,
+  ADD_ANSWER_TO_USER
 } from '../actions/user';
 
 const initialState = {
@@ -32,6 +33,17 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         answeredQuestions: action.payload.questions
+      }
+    case ADD_ANSWER_TO_USER:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          answers: {
+            ...state.user.answers,
+            [action.payload.qid]: action.payload.answer
+          }
+        }
       }
     default:
       return state

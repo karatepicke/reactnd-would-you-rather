@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Actions
-import { getUnansweredQuestionsForSignedInUser } from '../../store/actions/user';
-import { saveQuestionAnswer } from '../../store/actions/questions';
+import { getUnansweredQuestionsForSignedInUser, addAnswerToUser } from '../../store/actions/user';
+import { getSingleQuestion } from '../../store/actions/questions';
 
 // UI
 import { Segment, Form, Grid, Divider, Placeholder } from 'semantic-ui-react';
 
 // API
-import { _getQuestions, _getUsers } from '../../data/_DATA';
+import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../../data/_DATA';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -53,17 +53,27 @@ class QuestionForm extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    this.props.dispatch(saveQuestionAnswer(this.props.authedUser, this.props.currentQuestion.id, this.state.checked))
-    this.props.history.push(`/results/${this.props.currentQuestion.id}`)
+    _saveQuestionAnswer({ authedUser: this.props.user.id, qid: this.props.currentQuestion.id, answer: this.state.checked })
+      .then(() => { return _getQuestions() })
+      .then((questions) => {
+        const question = questions[this.props.currentQuestion.id]
+
+        if (question) {
+          this.props.dispatch(addAnswerToUser(this.props.currentQuestion.id, this.state.checked))
+          this.props.dispatch(getSingleQuestion(question))
+          this.props.history.push(`/results/${this.props.currentQuestion.id}`)
+        }
+      })
+      .catch((e) => { console.log(e) })
   }
 
   getAuthorAvatarUrl() {
     _getUsers().then((users) => {
       const authorId = this.props.currentQuestion.author
 
-      this.setState({ 
+      this.setState({
         loadingAvatar: false,
-        authorAvatar: users[authorId].avatarURL 
+        authorAvatar: users[authorId].avatarURL
       })
     })
   }
@@ -88,11 +98,11 @@ class QuestionForm extends React.Component {
                     <Placeholder.Image square />
                   </Placeholder>
                 ) : (
-                  <img
-                    className="question-author__avatar"
-                    src={this.state.authorAvatar}
-                    alt="User-Avatar" />
-                )}
+                    <img
+                      className="question-author__avatar"
+                      src={this.state.authorAvatar}
+                      alt="User-Avatar" />
+                  )}
               </div>
             </Grid.Column>
             <Grid.Column width={11}>
@@ -124,7 +134,7 @@ class QuestionForm extends React.Component {
                       <label>{this.props.currentQuestion.optionTwo.text}</label>
                     </div>
                   </Grid.Column>
-                <Form.Button>Submit</Form.Button>
+                  <Form.Button>Submit</Form.Button>
                 </Grid.Row>
               </Form>
             </Grid.Column>

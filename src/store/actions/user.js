@@ -46,29 +46,24 @@ export function getAnsweredQuestionsForSignedInUser(questions) {
   }
 }
 
-function addAnswerToUser(authedUser, qid, answer) {
+export function addAnswerToUser(qid, answer) {
   return {
     type: ADD_ANSWER_TO_USER,
-    authedUser,
-    qid,
-    answer,
+    payload: {
+      qid,
+      answer
+    }
   }
 }
 
-export function handleAddAnswerToUser(authedUser, qid, answer) {
-  return (dispatch) => {
-    dispatch(addAnswerToUser(authedUser, qid, answer))
-  }
-}
-
-function addQuestionToUser (question){
-  return{
+function addQuestionToUser(question) {
+  return {
     type: ADD_QUESTION_TO_USER,
     question,
   }
 }
 
-export function handleAddQuestionToUser (info) {
+export function handleAddQuestionToUser(info) {
   return (dispatch) => {
     dispatch(addQuestionToUser(info))
   }
