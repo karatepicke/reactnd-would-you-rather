@@ -109,6 +109,7 @@ class QuestionForm extends React.Component {
               <Form onSubmit={this.handleFormSubmit.bind(this)}>
                 <Grid.Row columns={2}>
                   <Grid.Column textAlign='center' className="question-box">
+                    <h3 className="option-heading">Option One</h3>
                     <div className="ui radio checkbox">
                       <input
                         onChange={this.handleRadioChange.bind(this, 'optionOne')}
@@ -122,6 +123,7 @@ class QuestionForm extends React.Component {
                     </div>
                   </Grid.Column>
                   <Grid.Column textAlign='center' className="question-box">
+                    <h3 className="option-heading">Option Two</h3>
                     <div className="ui radio checkbox">
                       <input
                         onChange={this.handleRadioChange.bind(this, 'optionTwo')}

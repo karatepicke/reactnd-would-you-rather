@@ -91,7 +91,12 @@ div.question-author__avatar--placeholder {
 }
 
 div.question-box label {
-  font-size: 2rem !important;
+  font-size: 1.7rem !important;
+}
+
+div.question-box .option-heading {
+  text-decoration: underline;
+  font-size: 2.3rem;
 }
 
 .result-box--voted {
