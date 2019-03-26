@@ -12,6 +12,8 @@ import { _getQuestions, _getUsers } from '../data/_DATA';
 // UI
 import { Tab, Divider, Placeholder } from 'semantic-ui-react';
 
+const avatarPlaceholder = 'https://semantic-ui.com/images/wireframe/image.png'
+
 class QuestionsPanel extends React.Component {
   state = {
     loadingAvatars: true,
@@ -96,7 +98,7 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={this.state.questionsAuthorsAvatars[unansweredQuestion.author].avatarURL}
+                    src={avatarPlaceholder}
                     alt="User-Avatar" 
                   />
                 )}
@@ -122,7 +124,7 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={this.state.questionsAuthorsAvatars[answeredQuestion.author].avatarURL}
+                    src={avatarPlaceholder}
                     alt="User-Avatar" />
                 )}
             </div>
