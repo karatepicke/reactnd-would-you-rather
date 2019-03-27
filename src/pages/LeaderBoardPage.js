@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // UI
-import { Container, Segment } from 'semantic-ui-react';
+import { Container, Segment, Icon } from 'semantic-ui-react';
 
 // custom components
 import WYRNavbar from '../components/Navigation';
 
 // API
 import { _getUsers } from '../data/_DATA';
+
+// Actions
 import { getAllUsers } from '../store/actions/users';
 
 class LeaderboardPage extends React.Component {
@@ -18,7 +20,7 @@ class LeaderboardPage extends React.Component {
       return
     }
 
-    this.getAllUsers();
+    // this.getAllUsers();
   }
 
   getAllUsers() {
@@ -44,9 +46,41 @@ class LeaderboardPage extends React.Component {
         })
         this.props.dispatch(getAllUsers(usersWithScore));
       })
-      .catch(
-        console.log('Could not resolve')
+      .catch((e) => {
+        (
+          console.log('error:', e)
+        )
+      })
+  }
+
+  leaderboardUsers() {
+    const users = this.props.users
+
+    return (Object.values(users).map((user) => {
+      const questions = user.questions && Array.isArray(user.questions) ? user.questions.length : 0
+      const answers = user.answers ? Object.entries(user.answers).length : 0
+      const score = questions + answers
+
+      const userWithScore = { ...user, score }
+
+      return (
+        <Segment key={userWithScore.id} className="my-segment">
+          <div className="leaderboard__userdetails">
+            <h3>{userWithScore.name}</h3>
+            <p>Questions posted: {questions}</p>
+            <p>Questions answered: {answers}</p>
+            <h4>Total score: {userWithScore.score}</h4>
+          </div>
+          <div className="leaderboard__avatar">
+            <img
+              alt={userWithScore.name + "Avatar"}
+              src={userWithScore.avatarURL}
+            />
+          </div>
+        </Segment>
       )
+    })
+    )
   }
 
 
@@ -54,14 +88,6 @@ class LeaderboardPage extends React.Component {
     if (!this.props.user) {
       return null
     }
-    const leaderboardUsers = this.props.users.map((user) => {
-      return (
-        <div>
-          <h3>{user.name}</h3>
-          <p>{user.score}</p>
-        </div>
-      )
-    })
 
     return (
       <div className="leaderboard">
@@ -69,8 +95,8 @@ class LeaderboardPage extends React.Component {
         <section className="main">
           <Container className="my-container">
             <Segment>
-              <h2>Leaderboard</h2>
-              {leaderboardUsers}
+              <h2>Leaderboard <Icon name="trophy"></Icon></h2>
+              {this.leaderboardUsers()}
             </Segment>
           </Container>
         </section>

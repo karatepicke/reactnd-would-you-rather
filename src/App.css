@@ -148,6 +148,29 @@ div.question-box .option-heading {
   font-style: italic;
 }
 
+/* LEADERBOARD */
+
+.my-segment {
+  display: flex;
+  min-height: 8rem;
+}
+
+.leaderboard__userdetails {
+  display: inline-block;
+}
+
+.leaderboard__avatar {
+  display: inline-flex;
+  margin-left: auto;
+  align-items: center;
+}
+
+.leaderboard__avatar img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+
 /* TYPOGRAPHY  */
 
 h1,
