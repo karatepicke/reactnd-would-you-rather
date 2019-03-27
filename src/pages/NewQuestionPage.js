@@ -6,8 +6,6 @@ import WYRNavbar from '../components/Navigation';
 
 // UI
 import { Container, Segment, Form, Icon, Divider } from 'semantic-ui-react';
-import { handleAddQuestion } from '../store/actions/questions';
-import { _saveQuestionAnswer, _saveQuestion } from '../data/_DATA';
 
 class NewQuestionPage extends React.Component {
   constructor(props) {
@@ -38,7 +36,7 @@ class NewQuestionPage extends React.Component {
     const optionOneText = this.optionOne.value
     const optionTwoText = this.optionTwo.value
     console.log(optionOneText, optionTwoText )
-    
+
     this.setState({
         displayErrorMessage1:false,
         displayErrorMessage2:false
@@ -76,17 +74,17 @@ class NewQuestionPage extends React.Component {
             <Form onSubmit={this.handleFormSubmit.bind(this)}>
             <Form.Field>
               <label>Option One</label>
-              <input 
+              <input
                 ref={input => this.optionOne = input}
-                placeholder='First option' 
+                placeholder='First option'
               />
             </Form.Field>
             <Divider horizontal>Or</Divider>
             <Form.Field>
               <label>Option Two</label>
-              <input 
+              <input
                 ref={input => this.optionTwo = input}
-                placeholder='Second option' 
+                placeholder='Second option'
                 />
             </Form.Field>
             <Form.Button>Submit</Form.Button>
@@ -99,7 +97,7 @@ class NewQuestionPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user, questions }) => ({ 
+const mapStateToProps = ({ user, questions }) => ({
   user: user.user,
   questions: questions.questions
 })

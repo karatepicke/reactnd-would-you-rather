@@ -12,16 +12,14 @@ import { _getQuestions, _getUsers } from '../data/_DATA';
 // UI
 import { Tab, Divider, Placeholder } from 'semantic-ui-react';
 
-const avatarPlaceholder = 'https://semantic-ui.com/images/wireframe/image.png'
-
 class QuestionsPanel extends React.Component {
   state = {
     loadingAvatars: true,
-    questionsAuthorsAvatars: []
+    questionsAuthors: {}
   }
 
   componentWillMount() {
-    this.getAuthorsAvatarUrls();
+    this.getAuthors();
     this.getUnansweredQuestions();
     this.getAnsweredQuestions();
   }
@@ -64,11 +62,10 @@ class QuestionsPanel extends React.Component {
     }
   }
 
-  getAuthorsAvatarUrls() {
+  getAuthors() {
     _getUsers().then((users) => {
-      console.log(users)
       this.setState({
-        questionsAuthorsAvatars: users,
+        questionsAuthors: users,
         loadingAvatars: false
       })
     })
@@ -98,8 +95,8 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={avatarPlaceholder}
-                    alt="User-Avatar" 
+                    src={this.state.questionsAuthors[unansweredQuestion.author].avatarURL}
+                    alt="User-Avatar"
                   />
                 )}
             </div>
@@ -124,7 +121,7 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={avatarPlaceholder}
+                    src={this.state.questionsAuthors[answeredQuestion.author].avatarURL}
                     alt="User-Avatar" />
                 )}
             </div>
