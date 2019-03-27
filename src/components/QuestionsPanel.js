@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // custom actions
-import { getUnansweredQuestionsForSignedInUser } from '../store/actions/user';
-import { getAnsweredQuestionsForSignedInUser } from '../store/actions/user';
+import { getUnansweredQuestionsForSignedInUser, getAnsweredQuestionsForSignedInUser } from '../store/actions/user';
+import { getAllUsers } from '../store/actions/users';
 
 // API
 import { _getQuestions, _getUsers } from '../data/_DATA';
@@ -13,9 +13,12 @@ import { _getQuestions, _getUsers } from '../data/_DATA';
 import { Tab, Divider, Placeholder } from 'semantic-ui-react';
 
 class QuestionsPanel extends React.Component {
-  state = {
-    loadingAvatars: true,
-    questionsAuthors: {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingAvatars: true,
+      questionsAuthors: {}
+    }
   }
 
   componentWillMount() {
@@ -64,11 +67,15 @@ class QuestionsPanel extends React.Component {
 
   getAuthors() {
     _getUsers().then((users) => {
-      this.setState({
-        questionsAuthors: users,
-        loadingAvatars: false
-      })
+      this.props.dispatch(getAllUsers(users));
     })
+      .catch(() => {
+        console.log('Could not resolve')
+      })
+  }
+
+  matchAuthorToUser(author) {
+    return this.props.users[author]
   }
 
   // Event handlers
@@ -87,7 +94,7 @@ class QuestionsPanel extends React.Component {
         <Link key={unansweredQuestion.id} to={"questions/" + unansweredQuestion.id} >
           <div className="panel--question__preview question-box">
             <div className="home-asked-by-wrapper">
-              <span>Asked by {this.state.questionsAuthors[unansweredQuestion.author].name}</span>
+              <span>Asked by {this.matchAuthorToUser(unansweredQuestion.author).name}</span>
               {loadingAvatar ? (
                 <Placeholder className="home-question-author__avatar--placeholder">
                   <Placeholder.Image square />
@@ -95,7 +102,7 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={this.state.questionsAuthors[unansweredQuestion.author].avatarURL}
+                    src={this.matchAuthorToUser(unansweredQuestion.author).avatarURL}
                     alt="User-Avatar"
                   />
                 )}
@@ -113,7 +120,7 @@ class QuestionsPanel extends React.Component {
         <Link key={answeredQuestion.id} to={"questions/" + answeredQuestion.id} >
           <div className="panel--question__preview question-box">
             <div className="home-asked-by-wrapper">
-              <span>Asked by {this.state.questionsAuthors[answeredQuestion.author].name}</span>
+              <span>Asked by {this.matchAuthorToUser(answeredQuestion.author).name}</span>
               {loadingAvatar ? (
                 <Placeholder className="home-question-author__avatar--placeholder">
                   <Placeholder.Image square />
@@ -121,7 +128,7 @@ class QuestionsPanel extends React.Component {
               ) : (
                   <img
                     className="home-question-author__avatar"
-                    src={this.state.questionsAuthors[answeredQuestion.author].avatarURL}
+                    src={this.matchAuthorToUser(answeredQuestion.author).avatarURL}
                     alt="User-Avatar" />
                 )}
             </div>
@@ -145,8 +152,9 @@ class QuestionsPanel extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, users }) => ({
   user: user.user,
+  users: users.users,
   unansweredQuestions: user.unansweredQuestions,
   answeredQuestions: user.answeredQuestions
 })
