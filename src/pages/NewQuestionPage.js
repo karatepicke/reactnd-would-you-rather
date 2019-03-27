@@ -6,6 +6,7 @@ import WYRNavbar from '../components/Navigation';
 
 // UI
 import { Container, Segment, Form, Icon, Divider } from 'semantic-ui-react';
+import { _saveQuestion } from '../data/_DATA';
 
 class NewQuestionPage extends React.Component {
   constructor(props) {
@@ -35,24 +36,23 @@ class NewQuestionPage extends React.Component {
     e.preventDefault()
     const optionOneText = this.optionOne.value
     const optionTwoText = this.optionTwo.value
-    console.log(optionOneText, optionTwoText )
 
     this.setState({
-        displayErrorMessage1:false,
-        displayErrorMessage2:false
+      displayErrorMessage1: false,
+      displayErrorMessage2: false
     })
 
-    if(optionOneText && optionTwoText) {
+    if (optionOneText && optionTwoText) {
       _saveQuestion({
-          optionOneText,
-          optionTwoText,
-          author: this.props.user.id
-        })
+        optionOneText,
+        optionTwoText,
+        author: this.props.user.id
+      })
 
-        this.props.history.push('/')
+      this.props.history.push('/')
     } else {
-        optionOneText === '' && this.setState(() => ({displayErrorMessage1:true}))
-        optionTwoText === '' && this.setState(() => ({displayErrorMessage2:true}))
+      optionOneText === '' && this.setState(() => ({ displayErrorMessage1: true }))
+      optionTwoText === '' && this.setState(() => ({ displayErrorMessage2: true }))
     }
   }
 
@@ -65,31 +65,31 @@ class NewQuestionPage extends React.Component {
         <WYRNavbar active="questions" />
         <section className="main">
           <Container className="my-container">
-          <Segment>
-            <h2>Your're posting as {this.props.user.name}</h2>
-            <span>Here you can post your own question for the community to answer</span>
-            <Icon name="question circle"/>
-            <p>Complete the question:</p>
-            <h3>Would you rather...</h3>
-            <Form onSubmit={this.handleFormSubmit.bind(this)}>
-            <Form.Field>
-              <label>Option One</label>
-              <input
-                ref={input => this.optionOne = input}
-                placeholder='First option'
-              />
-            </Form.Field>
-            <Divider horizontal>Or</Divider>
-            <Form.Field>
-              <label>Option Two</label>
-              <input
-                ref={input => this.optionTwo = input}
-                placeholder='Second option'
-                />
-            </Form.Field>
-            <Form.Button>Submit</Form.Button>
-            </Form>
-          </Segment>
+            <Segment>
+              <h2>Your're posting as {this.props.user.name}</h2>
+              <span>Here you can post your own question for the community to answer</span>
+              <Icon name="question circle" />
+              <p>Complete the question:</p>
+              <h3>Would you rather...</h3>
+              <Form onSubmit={this.handleFormSubmit.bind(this)}>
+                <Form.Field>
+                  <label>Option One</label>
+                  <input
+                    ref={input => this.optionOne = input}
+                    placeholder='First option'
+                  />
+                </Form.Field>
+                <Divider horizontal>Or</Divider>
+                <Form.Field>
+                  <label>Option Two</label>
+                  <input
+                    ref={input => this.optionTwo = input}
+                    placeholder='Second option'
+                  />
+                </Form.Field>
+                <Form.Button>Submit</Form.Button>
+              </Form>
+            </Segment>
           </Container>
         </section>
       </div>
