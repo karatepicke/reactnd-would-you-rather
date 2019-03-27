@@ -87,7 +87,7 @@ class QuestionsPanel extends React.Component {
         <Link key={unansweredQuestion.id} to={"questions/" + unansweredQuestion.id} >
           <div className="panel--question__preview question-box">
             <div className="home-asked-by-wrapper">
-              <span>Asked by {unansweredQuestion.author}</span>
+              <span>Asked by {this.state.questionsAuthors[unansweredQuestion.author].name}</span>
               {loadingAvatar ? (
                 <Placeholder className="home-question-author__avatar--placeholder">
                   <Placeholder.Image square />
@@ -113,7 +113,7 @@ class QuestionsPanel extends React.Component {
         <Link key={answeredQuestion.id} to={"questions/" + answeredQuestion.id} >
           <div className="panel--question__preview question-box">
             <div className="home-asked-by-wrapper">
-              <span>Asked by {answeredQuestion.author}</span>
+              <span>Asked by {this.state.questionsAuthors[answeredQuestion.author].name}</span>
               {loadingAvatar ? (
                 <Placeholder className="home-question-author__avatar--placeholder">
                   <Placeholder.Image square />
