@@ -1,8 +1,10 @@
 import React from 'react';
-import ImpersonationBadge from './ImpersonationBadge';
 import { NavLink } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
+
+// Custom components
 import LoginLogout from './LoginLogout';
+import ImpersonationBadge from './ImpersonationBadge';
 
 export default class WYRNavbar extends React.Component {
   render() {
